@@ -50,6 +50,20 @@ export const useFirestore = (collection) => {
         }
     }
 
+    const updateDocument = async (doc) => {
+        // dispatch({ type: 'IS_PENDING' })
+        const firebaseDoc = projectFirestore.doc(`${collection}/${doc.id}`)
+        try {
+            const modifiedAt = timestam.fromDate(new Date())
+            console.log(doc)
+            const updateDocument = await firebaseDoc.update({ ...doc, modifiedAt })
+            console.log(updateDocument)
+            dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: updateDocument })
+        } catch (error) {
+            // dispatchIfNotCancelled({ type: 'ERROR', payload: error.message })
+        }
+    }
+
     //delete a doocument
     const deleteDocument = (id) => {
         
@@ -61,5 +75,5 @@ export const useFirestore = (collection) => {
         }
     }, [])
     
-    return {addDocument, deleteDocument, response}
+    return {addDocument, deleteDocument, updateDocument, response}
 }

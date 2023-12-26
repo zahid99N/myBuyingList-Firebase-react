@@ -1,5 +1,6 @@
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useCollection } from '../../hooks/useCollection'
+import useFixeUid from '../../hooks/useFixeUid'
 
 // styles
 import styles from './Home.module.css'
@@ -9,10 +10,11 @@ import TransactionForm from './TransactionForm'
 import TransactionLIst from './TransactionLIst'
 
 export default function Home() {
+  // const res =useFixeUid()
   const { user } = useAuthContext()
   const { documents, error } = useCollection(
     'transactions',
-    // ["uid", "==", user.uid]
+    ["uid", "==", user.uid]
   )
 
   return (
