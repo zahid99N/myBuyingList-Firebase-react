@@ -11,7 +11,7 @@ export default function useFixeUid() {
         for (const doc of documents) {
             if (doc.uid.uid) {
                 updateDocument({ ...doc, uid: doc.uid.uid })
-                console.log(response)
+                
             }
         }
     }
